@@ -6,17 +6,9 @@ from typing import TYPE_CHECKING
 
 # 3rd party imports
 from pygame import (
+    constants as pyg_constants,
     display as pyg_display,
     event as pyg_event)
-from pygame.constants import (
-    FULLSCREEN as PYG_FULLSCREEN,
-    K_LALT as PYG_K_LALT,
-    K_LCTRL as PYG_K_LCTRL,
-    K_RALT as PYG_K_RALT,
-    K_RCTRL as PYG_K_RCTRL,
-    KEYDOWN as PYG_KEYDOWN,
-    KEYUP as PYG_KEYUP,
-    SHOWN as PYG_SHOWN)
 from pygame.mouse import set_visible as pyg_mouse_set_visible
 from pygame.time import Clock as pyg_Clock
 
@@ -30,7 +22,8 @@ def game_loop() -> None:
     game_running: bool = True
     game_clock: pyg_Clock = pyg_Clock()
 
-    unlock_keys: frozenset[int] = frozenset((PYG_K_LCTRL, PYG_K_LALT, PYG_K_RALT, PYG_K_RCTRL))
+    unlock_keys: frozenset[int] = frozenset((
+        pyg_constants.K_LCTRL, pyg_constants.K_LALT, pyg_constants.K_RALT, pyg_constants.K_RCTRL))
     unlock_keys_length: int = len(unlock_keys)
     pressed_unlock_keys: int = 0
 
@@ -38,10 +31,10 @@ def game_loop() -> None:
         event: Event
 
         for event in pyg_event.get():
-            if event.type == PYG_KEYDOWN:
+            if event.type == pyg_constants.KEYDOWN:
                 if event.key in unlock_keys:
                     pressed_unlock_keys += 1
-            elif event.type == PYG_KEYUP:
+            elif event.type == pyg_constants.KEYUP:
                 if event.key in unlock_keys:
                     pressed_unlock_keys -= 1
 
@@ -57,7 +50,7 @@ def game_loop() -> None:
 def main() -> None:
     pyg_display.init()
 
-    screen: Surface = pyg_display.set_mode((0, 0), flags=PYG_SHOWN | PYG_FULLSCREEN, depth=1)
+    screen: Surface = pyg_display.set_mode((0, 0), flags=pyg_constants.SHOWN | pyg_constants.FULLSCREEN, depth=1)
     pyg_display.set_caption('Python Lock Screen')
     pyg_display.set_allow_screensaver(False)  # Prevent OS screen saver from activating
 
@@ -65,7 +58,7 @@ def main() -> None:
     screen.set_clip((0, 0, 0, 0))  # Set modifiable pixels
 
     pyg_event.set_blocked(None)  # Blocks ALL event types
-    pyg_event.set_allowed((PYG_KEYDOWN, PYG_KEYUP))  # Enable desired event types
+    pyg_event.set_allowed((pyg_constants.KEYDOWN, pyg_constants.KEYUP))  # Enable desired event types
     pyg_mouse_set_visible(False)  # Hide cursor
 
     pyg_event.set_grab(True)
