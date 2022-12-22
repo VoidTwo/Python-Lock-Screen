@@ -31,6 +31,7 @@ def game_loop() -> None:
     game_clock: pyg_Clock = pyg_Clock()
 
     unlock_keys: frozenset[int] = frozenset((PYG_K_LCTRL, PYG_K_LALT, PYG_K_RALT, PYG_K_RCTRL))
+    unlock_keys_length: int = len(unlock_keys)
     pressed_unlock_keys: int = 0
 
     while game_running:
@@ -44,7 +45,7 @@ def game_loop() -> None:
                 if event.key in unlock_keys:
                     pressed_unlock_keys -= 1
 
-        if pressed_unlock_keys == 4:
+        if pressed_unlock_keys == unlock_keys_length:
             game_running = False
         else:
             game_clock.tick(60)  # Significantly reduce CPU usage
