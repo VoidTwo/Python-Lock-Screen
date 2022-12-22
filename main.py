@@ -28,25 +28,27 @@ if TYPE_CHECKING:
 
 def game_loop() -> None:
     game_running: bool = True
-    unlock_sequence: int = 0
-    clock: pyg_Clock = pyg_Clock()
+    game_clock: pyg_Clock = pyg_Clock()
+
+    unlock_keys: frozenset[int] = frozenset((PYG_K_LCTRL, PYG_K_LALT, PYG_K_RALT, PYG_K_RCTRL))
+    pressed_unlock_keys: int = 0
 
     while game_running:
         event: Event
 
         for event in pyg_event.get():
             if event.type == PYG_KEYDOWN:
-                if event.key in (PYG_K_LCTRL, PYG_K_LALT, PYG_K_RALT, PYG_K_RCTRL):
-                    unlock_sequence += 1
+                if event.key in unlock_keys:
+                    pressed_unlock_keys += 1
 
-                    if unlock_sequence == 4:
+                    if pressed_unlock_keys == 4:
                         game_running = False
                         break
             elif event.type == PYG_KEYUP:
-                if event.key in (PYG_K_LCTRL, PYG_K_LALT, PYG_K_RALT, PYG_K_RCTRL):
-                    unlock_sequence -= 1
+                if event.key in unlock_keys:
+                    pressed_unlock_keys -= 1
 
-        clock.tick(60)  # Significantly reduce CPU usage
+        game_clock.tick(60)  # Significantly reduce CPU usage
 
     pyg_event.clear()
     return
