@@ -40,13 +40,12 @@ def game_loop() -> None:
             if event.type == PYG_KEYDOWN:
                 if event.key in unlock_keys:
                     pressed_unlock_keys += 1
-
-                    if pressed_unlock_keys == 4:
-                        game_running = False
-                        break
             elif event.type == PYG_KEYUP:
                 if event.key in unlock_keys:
                     pressed_unlock_keys -= 1
+
+            if pressed_unlock_keys == 4:
+                game_running = False
 
         game_clock.tick(60)  # Significantly reduce CPU usage
 
