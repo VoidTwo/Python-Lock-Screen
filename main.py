@@ -6,6 +6,9 @@ from typing import TYPE_CHECKING
 
 # 3rd party imports
 from pygame import (
+    display as pyg_display,
+    event as pyg_event)
+from pygame.constants import (
     FULLSCREEN as PYG_FULLSCREEN,
     K_LALT as PYG_K_LALT,
     K_LCTRL as PYG_K_LCTRL,
@@ -13,9 +16,7 @@ from pygame import (
     K_RCTRL as PYG_K_RCTRL,
     KEYDOWN as PYG_KEYDOWN,
     KEYUP as PYG_KEYUP,
-    SHOWN as PYG_SHOWN,
-    display as pyg_display,
-    event as pyg_event)
+    SHOWN as PYG_SHOWN)
 from pygame.mouse import set_visible as pyg_mouse_set_visible
 from pygame.time import Clock as pyg_Clock
 
