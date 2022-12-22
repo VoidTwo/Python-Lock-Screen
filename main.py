@@ -58,14 +58,14 @@ def main() -> None:
 
     screen: Surface = pyg_display.set_mode((0, 0), flags=PYG_SHOWN | PYG_FULLSCREEN, depth=1)
     pyg_display.set_caption('Python Lock Screen')
-    pyg_display.set_allow_screensaver(False)
+    pyg_display.set_allow_screensaver(False)  # Prevent OS screen saver from activating
 
-    screen.fill((0, 0, 0))
-    screen.set_clip(screen.get_rect())
+    screen.fill((0, 0, 0))  # Black screen
+    screen.set_clip((0, 0, 0, 0))  # Set modifiable pixels
 
-    pyg_event.set_blocked(None)
-    pyg_event.set_allowed((PYG_KEYDOWN, PYG_KEYUP))
-    pyg_mouse_set_visible(False)
+    pyg_event.set_blocked(None)  # Blocks ALL event types
+    pyg_event.set_allowed((PYG_KEYDOWN, PYG_KEYUP))  # Enable desired event types
+    pyg_mouse_set_visible(False)  # Hide cursor
 
     pyg_event.set_grab(True)
     game_loop()
