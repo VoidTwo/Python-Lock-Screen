@@ -12,8 +12,8 @@ select =
     W
 
 ignore =
-    E111,
     E721,
+    F842,
     W503,
     W504
 
@@ -23,6 +23,7 @@ format = default
 
 count = True
 statistics = True
+show_source = False
 
 hang_closing = True
 

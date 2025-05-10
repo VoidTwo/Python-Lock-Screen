@@ -25,6 +25,6 @@ Advanced:
 `[PYTHONW] -OO main.py`
 
 ## Notes
-`[PYTHON]` refers to your Python command or executable. For example, in Windows the Python command is usually `py`, and in some Linux distributions this might be `python3` or `python3.11`. This can also be the path to the executable; for example, in Windows it would be the path to `python.exe`.
+`[PYTHON]` refers to your Python command or executable. For example, in Windows the Python command is usually `py`, and in some Linux distributions this might be `python3` or `python3.12`. This can also be the path to the executable; for example, in Windows it would be the path to `python.exe`.
 
 `[PYTHONW]` refers to the Windows `pythonw.exe` executable which disables things like command line output for slightly better performance.
